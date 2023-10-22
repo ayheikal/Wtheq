@@ -59,6 +59,8 @@ DB_PASSWORD= // the data baseuser password and default is empty
    php artisan optimize 
    composer dump-autoload
 
+    php artisan db:seed // to run seed of user types
+
    ```
 
 -- php artisan jwt:secret
