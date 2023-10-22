@@ -38,7 +38,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(),[
             "name" => ["required","string","max:255","min:2","unique:products"],
             "description" => ["required","string","min:2","max:800"],
-            "image" => ["required","string"],
+            "image" => ["required","string"],// from uploaded image 
             "slug" => ["required","string"],
             "price" => ["required","integer","min:1"],
         ]);

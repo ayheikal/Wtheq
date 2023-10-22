@@ -1,6 +1,9 @@
 <?php
 
-use App\Models\User;    
+use App\Models\User;
+use Image as Image;
+
+
 
 function ResponseCollection($collection) :?array {
 
@@ -34,4 +37,26 @@ function authenticatedUser() : ?User {
 
     return auth("api")->user();
 
+}
+function resizeImageAsWebP($file, $storage, $width=null, $height=null)
+{
+    // $storage= $storage."seller/";
+    if($file == ''|| $file == null)return $file;
+    $image = $file;
+    $input['file'] = rand(123456, 999999).time().'.'.'webp';
+    $destinationPath = public_path($storage);
+    $imgFile = Image::make($image->getRealPath())->encode('webp', 90);
+    if($height==null){
+        $height = $imgFile->height();
+    }
+    if($width==null){
+        $width = $imgFile->width();
+    }
+
+    $imgFile->resize($width, $height, function ($constraint) {
+    })
+    ->save($destinationPath.'/'.$input['file']);
+
+
+    return $storage.'/'.$input['file'];
 }
