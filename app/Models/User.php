@@ -61,4 +61,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    function scopeActive($query) {
+
+        return $query->where('users.is_active', User::ACTIVE_STATUS);
+
+    }
 }

@@ -24,7 +24,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        try {
+
+            // use only the validated data for storing
+            $response = $this->userService->getUsers();
+            $message = 'user retreived successfully';
+
+            return $response?ApiResponse::success($response, $message):ApiResponse::error("user not found");
+
+        }catch(\Exception $e){
+            $message = $e->getMessage();
+            return ApiResponse::error($message);
+        }
     }
 
     /**
@@ -71,7 +82,19 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+
+        try {
+
+            // use only the validated data for storing
+            $response = $this->userService->getUserById($id);
+            $message = 'user retreived successfully';
+
+            return $response?ApiResponse::success($response, $message):ApiResponse::error("user not found");
+
+        }catch(\Exception $e){
+            $message = $e->getMessage();
+            return ApiResponse::error($message);
+        }
     }
 
     /**

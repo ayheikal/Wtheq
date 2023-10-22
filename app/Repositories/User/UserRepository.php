@@ -11,10 +11,15 @@ class UserRepository{
     {
         $this->user = $user;
     }
+    public function all()
+    {
+        return $this->user;
+
+    }
 
     public function findById($userId): object
     {
-        return $this->user->where('seller_users.id',$userId);
+        return $this->user->where('users.id',$userId);
     }
 
 

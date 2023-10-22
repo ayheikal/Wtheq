@@ -5,7 +5,7 @@ use App\Http\Resources\{UserCollection, UserResource, VendorResource};
 use App\Models\User;
 use App\Repositories\User\UserRepository;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+use Illuminate\Database\Eloquent\Collection;
 
 
 class UserService{
@@ -84,6 +84,21 @@ class UserService{
 
         $data['password'] = bcrypt($data['password']);
         return $this->userRepository->store($data);
+    }
+
+    function getUserById($userId) : ?object {
+
+        return new UserResource($this->userRepository->findById($userId)
+            ->first());
+
+    }
+    function getUsers() :? UserCollection  {
+
+        $users =  $this->userRepository->all()
+            ->active()
+            ->paginate();
+            
+        return new UserCollection($users);
     }
 
 
