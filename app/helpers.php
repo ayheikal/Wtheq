@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\User;    
 
 function ResponseCollection($collection) :?array {
 
@@ -23,4 +23,15 @@ function ResponseCollection($collection) :?array {
             'total' => $collection->total(),
         ],
     ];
+}
+function paginatedRowsCount() : int {
+
+    return 15;
+
+}
+
+function authenticatedUser() : ?User {
+
+    return auth("api")->user();
+
 }

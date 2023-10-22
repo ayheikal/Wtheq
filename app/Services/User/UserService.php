@@ -96,8 +96,8 @@ class UserService{
 
         $users =  $this->userRepository->all()
             ->active()
-            ->paginate();
-            
+            ->paginate(paginatedRowsCount());
+
         return new UserCollection($users);
     }
 
